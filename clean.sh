@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# 函数：递归删除目录下的可执行文件
+# 递归删除目录下的可执行文件
 delete_executables() {
     local dir=$1
-    
+
     # 遍历目录中的文件和目录
     for file in "$dir"/*; do
-        if [[ -f "$file" && $(file -b "$file") =~ "executable" && "$file" != "./clean.sh" ]]; then
+        if [[ -f "$file" && $(file -b "$file") =~ "ELF 64-bit LSB pie executable" && "$file" != "./clean.sh" ]]; then
             # 如果是可执行文件，则删除
             echo "删除文件: $file"
             rm "$file"
@@ -17,8 +17,11 @@ delete_executables() {
     done
 }
 
-# 指定要删除可执行文件的目录
-directory="."
+# 若没有参数指定进行清除的目录
+if [ $# -eq 0 ]; then
+  directory="."
+else
+  directory="$1"
+fi
 
-# 调用函数删除目录下的可执行文件
 delete_executables "$directory"
