@@ -73,4 +73,3 @@ fn main() {
     assert_eq!(list.pop(), Some(1));
     assert_eq!(list.pop(), None);
 }
-

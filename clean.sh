@@ -6,7 +6,7 @@ delete_executables() {
 
     # 遍历目录中的文件和目录
     for file in "$dir"/*; do
-        if [[ -f "$file" && $(file -b "$file") =~ "ELF 64-bit LSB pie executable" && "$file" != "./clean.sh" ]]; then
+        if [[ -f "$file" && $(file -b "$file") =~ "ELF" && "$file" != "./clean.sh" ]]; then
             # 如果是可执行文件，则删除
             echo "删除文件: $file"
             rm "$file"
